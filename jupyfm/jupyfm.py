@@ -1,4 +1,7 @@
 from notebook.services.contents.largefilemanager import LargeFileManager
+import os
+from tornado import web
+import shutil
 
 class jupyfm(LargeFileManager):
     def rename_file(self, old_path, new_path):
