@@ -6,6 +6,7 @@ import shutil
 class jupyfm(LargeFileManager):
     def rename_file(self, old_path, new_path):
         """Rename a file."""
+        orig_old_path = old_path
         old_path = old_path.strip('/')
         new_path = new_path.strip('/')
         if new_path == old_path:
@@ -21,7 +22,7 @@ class jupyfm(LargeFileManager):
         # Move the file
         try:
             with self.perm_to_403():
-                for i in os.scandir():
+                for i in os.scandir(path=orig_old_path):
                     if i.is_dir():
                         raise web.HTTPError(500, 'Renaming a folder with subfolders is not allowed: %s' % (old_path))
                 shutil.move(old_os_path, new_os_path)
