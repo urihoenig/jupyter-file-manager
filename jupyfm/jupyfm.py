@@ -22,7 +22,7 @@ class jupyfm(LargeFileManager):
         # Move the file
         try:
             with self.perm_to_403():
-                if os.path.isdir(path=orig_old_path):
+                if os.path.isdir(orig_old_path):
                     for i in os.scandir(path=orig_old_path):
                         if i.is_dir():
                             raise web.HTTPError(500, 'Renaming a folder with subfolders is not allowed: %s' % (old_path))
